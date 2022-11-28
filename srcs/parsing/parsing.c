@@ -19,29 +19,36 @@ static bool	check_map(char *tmp) {
 	return (true);
 }
 
-void	init_color(char *tmp, int **color)
+static bool	init_color(char *tmp, int **color, int floor_ceiling)
 {
 	int	i;
 	int	j;
 	int	rgb;
+	int	comma;
 
 	i = 0;
 	rgb = 0;
+	comma = 0;
 	while(tmp[i])
 	{
 		j = 0;
-		while (ft_isdigit(tmp[i + j]))
+		while (tmp[i + j] && ft_isdigit(tmp[i + j]))
 		{
 			rgb = rgb * 10 + tmp[i + j] - '0';
 			j++;
 		}
-		color[]
+		if (rgb > 255 || !j)
+			return (false);
+		else
+			color[floor_ceiling][comma] = rgb;
+		i += j + 1;
 	}
+	return (true);
 }
 
 static bool	check_colors(char *tmp, int i, t_map *map) {
 	const char	*color[2] = {"F ", "C "};
-	int			**map_color[2] = {map->color_floor, map->color_ceiling};
+	int			*map_color[2] = {map->color_floor, map->color_ceiling};
 	if (ft_strncmp(tmp, color[i - 4], 2))
 		return (ft_printf("Error\nProbleme de configuration des couleurs\n"),
 			free(tmp), false);

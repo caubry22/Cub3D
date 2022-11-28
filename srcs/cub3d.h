@@ -47,8 +47,8 @@ typedef struct s_map
 {
 	int	width;
 	int	height;
-	int	*color_floor[3];
-	int	*color_ceiling[3];
+	int	color_floor[3];
+	int	color_ceiling[3];
 }	t_map;
 
 bool	parsing(int ac, char **av);
