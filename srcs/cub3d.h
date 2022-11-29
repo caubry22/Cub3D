@@ -35,6 +35,7 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <stdarg.h>
+# include <errno.h>
 
 typedef struct s_struct
 {
@@ -45,13 +46,13 @@ typedef struct s_struct
 
 typedef struct s_map
 {
-	int	width;
-	int	height;
+	int size[2];
 	int	color_floor[3];
 	int	color_ceiling[3];
+	char *texture[5];
 }	t_map;
 
-bool	parsing(int ac, char **av);
+bool	parsing(int ac, char **av, t_map *map);
 bool	check_extension(char *map);
 char	*get_next_line(int fd);
 int		ft_stop(char *tmp);
