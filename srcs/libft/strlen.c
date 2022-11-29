@@ -1,35 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strcmp.c                                           :+:      :+:    :+:   */
+/*   strlen.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/29 16:09:53 by caubry            #+#    #+#             */
-/*   Updated: 2022/11/29 16:09:54 by caubry           ###   ########.fr       */
+/*   Created: 2022/11/29 16:19:36 by caubry            #+#    #+#             */
+/*   Updated: 2022/11/29 16:19:47 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int	ft_strcmp(char *s1, char *s2)
+size_t	__strlen(const char *s)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
-	while ((s1[i]) && (s2[i]) && (s1[i] == s2[i]))
+	if (!s)
+		return (0);
+	while (s[i])
 		i++;
-	return (s1[i] - s2[i]);
-}
-
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
-{
-	unsigned int	i;
-
-	i = 0;
-	if (n < 1)
-		return (2);
-	while (s1[i] && s2[i] && s1[i] == s2[i] && i < n - 1)
-		i++;
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+	return (i);
 }

@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   strtrim.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/29 16:09:42 by caubry            #+#    #+#             */
+/*   Updated: 2022/11/29 16:25:49 by caubry           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cub3d.h"
 
-static int	__is_charset(char *sep, char c)
+int	__is_charset(char *sep, char c)
 {
 	int	i;
 
@@ -14,7 +26,7 @@ static int	__is_charset(char *sep, char c)
 	return (0);
 }
 
-static int	__calculate_str(char *str, char *sep)
+int	__calculate_str(char *str, char *sep)
 {
 	int	i;
 	int	j;
@@ -45,7 +57,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 		return (0);
 	size = __calculate_str((char *)s1, (char *)set);
 	if (!set)
-		return (__strdup(s1));
+		return (ft_strdup(s1));
 	final_str = (char *)malloc(sizeof(char) * size + 1);
 	if (!(final_str))
 		return (0);

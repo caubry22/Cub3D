@@ -1,35 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strcmp.c                                           :+:      :+:    :+:   */
+/*   strdup.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/29 16:09:53 by caubry            #+#    #+#             */
-/*   Updated: 2022/11/29 16:09:54 by caubry           ###   ########.fr       */
+/*   Created: 2022/11/29 16:09:49 by caubry            #+#    #+#             */
+/*   Updated: 2022/11/29 16:09:50 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int	ft_strcmp(char *s1, char *s2)
+char	*ft_strdup(const char *s1)
 {
-	int	i;
+	int		i;
+	char	*final_str;
 
 	i = 0;
-	while ((s1[i]) && (s2[i]) && (s1[i] == s2[i]))
+	while (s1[i])
 		i++;
-	return (s1[i] - s2[i]);
-}
-
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
-{
-	unsigned int	i;
-
+	final_str = (char *)malloc(sizeof(char) * (i + 1));
+	if (!(final_str))
+		return (0);
 	i = 0;
-	if (n < 1)
-		return (2);
-	while (s1[i] && s2[i] && s1[i] == s2[i] && i < n - 1)
+	while (s1[i])
+	{
+		final_str[i] = s1[i];
 		i++;
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+	}
+	final_str[i] = 0;
+	return (final_str);
 }

@@ -1,63 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/29 16:10:05 by caubry            #+#    #+#             */
+/*   Updated: 2022/11/29 16:19:19 by caubry           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cub3d.h"
-
-size_t	__strlen(const char *s)
-{
-	size_t	i;
-
-	i = 0;
-	if (!s)
-		return (0);
-	while (s[i])
-		i++;
-	return (i);
-}
-
-char	*__strdup(const char *s1)
-{
-	int		i;
-	char	*final_str;
-
-	i = 0;
-	while (s1[i])
-		i++;
-	final_str = (char *)malloc(sizeof(char) * (i + 1));
-	if (!(final_str))
-		return (0);
-	i = 0;
-	while (s1[i])
-	{
-		final_str[i] = s1[i];
-		i++;
-	}
-	final_str[i] = 0;
-	return (final_str);
-}
-
-char	*ft_strjoin(char *s1, char *s2)
-{
-	int		i;
-	int		j;
-	char	*final_line;
-
-	i = 0;
-	j = 0;
-	if (!s1)
-		s1 = __strdup("");
-	if (!s2)
-		return (NULL);
-	final_line = malloc(sizeof(char) * (__strlen(s1) + __strlen(s2) + 1));
-	if (!final_line)
-		return (0);
-	while (s1[i])
-	{
-		final_line[i] = s1[i];
-		i++;
-	}
-	while (s2[j])
-		final_line[i++] = s2[j++];
-	final_line[i] = 0;
-	return (free(s1), final_line);
-}
 
 int	_is_newline(char c)
 {

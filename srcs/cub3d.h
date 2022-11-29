@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 10:39:07 by odessein          #+#    #+#             */
-/*   Updated: 2022/11/24 10:46:28 by odessein         ###   ########.fr       */
+/*   Updated: 2022/11/29 17:24:04 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,30 +47,81 @@ typedef struct s_struct
 typedef struct s_map
 {
 	int size[2];
-	int	color_floor[3];
-	int	color_ceiling[3];
+	int	color_floor[4];
+	int	color_ceiling[4];
 	char *texture[5];
 }	t_map;
 
-bool	parsing(int ac, char **av, t_map *map);
-bool	check_extension(char *map);
-char	*get_next_line(int fd);
-int		ft_stop(char *tmp);
-char	*ft_strjoin(char *s1, char *s2);
-char	*ft_memmove(char *dst, char *src, int k);
-int		ft_srcsize(char *content);
-void	__print_memory(void *nb, t_struct *content);
-void	__putnbr(int n, t_struct *content);
-void	__base(unsigned long long nb, char *base, t_struct *content);
-void	__putstr(char *str, t_struct *content);
-void	__putchar(char c, t_struct *content);
-int		ft_printf(const char *format_str, ...);
-char	*ft_strtrim(char const *s1, char const *set);
-size_t	__strlen(const char *s);
-char	*__strdup(const char *s1);
+//   ---     MAIN     ---
+
+void		init_map(t_map *map);
+
+
+//   ---     PARSING     ---
+
+// parsing.c
+
+bool		check_extension(char *map);
+bool		check_map(char *tmp);
+bool		parsing_loop(char *tmp, int *i, t_map *map);
+bool		parsing(int ac, char **av, t_map *map);
+void		print_map(t_map *map);
+
+
+// check_texture_color.c
+
+bool		init_color(char *tmp, int *color);
+bool		check_colors(char *tmp, t_map *map);
+bool		init_textures(char *tmp, int i, t_map *map);
+bool		check_texture(char	*tmp, t_map *map);
+int			is_texture_or_color(char *tmp);
+
+
+// parsing_utils.c
+
 int			tmp_length(char	*tmp);
-int		ft_strncmp(const char *s1, const char *s2, size_t n);
-int		ft_strcmp(char *s1, char *s2);
+int			line_map_length(char *tmp);
+
+
+//   ---     LIBFT     ---
+
+// ft_printf.c
+
+int			ft_printf(const char *format_str, ...);
+void		__treat_format(t_struct *content, va_list argument);
+
+// ft_printf_utils.c
+
+void		__print_memory(void *nb, t_struct *content);
+void		__putnbr(int n, t_struct *content);
+void		__base(unsigned long long nb, char *base, t_struct *content);
+void		__putstr(char *str, t_struct *content);
+void		__putchar(char c, t_struct *content);
+
+// get_next_line.c
+
+int			_is_newline(char c);
+char		*_get_line(char *str);
+int			_is_line(char *str);
+char		*_get_save(char *save);
+char		*get_next_line(int fd);
+
+// strtrim.c
+
+int			__is_charset(char *sep, char c);
+int			__calculate_str(char *str, char *sep);
+char		*ft_strtrim(char const *s1, char const *set);
+
+// Autres fonctions libft
+
+int			ft_isdigit(int c);
+int			ft_strcmp(char *s1, char *s2);
+int			ft_strncmp(const char *s1, const char *s2, size_t n);
+char		*ft_strdup(const char *s1);
+char		*ft_strjoin(char *s1, char *s2);
+size_t		__strlen(const char *s);
+
+
 
 
 

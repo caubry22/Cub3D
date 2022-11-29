@@ -1,35 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strcmp.c                                           :+:      :+:    :+:   */
+/*   strjoin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/29 16:09:53 by caubry            #+#    #+#             */
-/*   Updated: 2022/11/29 16:09:54 by caubry           ###   ########.fr       */
+/*   Created: 2022/11/29 16:18:53 by caubry            #+#    #+#             */
+/*   Updated: 2022/11/29 16:19:12 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int	ft_strcmp(char *s1, char *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
-	int	i;
+	int		i;
+	int		j;
+	char	*final_line;
 
 	i = 0;
-	while ((s1[i]) && (s2[i]) && (s1[i] == s2[i]))
+	j = 0;
+	if (!s1)
+		s1 = ft_strdup("");
+	if (!s2)
+		return (NULL);
+	final_line = malloc(sizeof(char) * (__strlen(s1) + __strlen(s2) + 1));
+	if (!final_line)
+		return (0);
+	while (s1[i])
+	{
+		final_line[i] = s1[i];
 		i++;
-	return (s1[i] - s2[i]);
-}
-
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
-{
-	unsigned int	i;
-
-	i = 0;
-	if (n < 1)
-		return (2);
-	while (s1[i] && s2[i] && s1[i] == s2[i] && i < n - 1)
-		i++;
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+	}
+	while (s2[j])
+		final_line[i++] = s2[j++];
+	final_line[i] = 0;
+	return (free(s1), final_line);
 }
