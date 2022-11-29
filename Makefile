@@ -10,6 +10,7 @@ SRC =	srcs/main.c\
 		srcs/libft/printf/ft_printf_utils.c\
 		srcs/libft/get_next_line.c\
 		srcs/libft/isdigit.c\
+		srcs/libft/split.c\
 		srcs/libft/strcmp.c\
 		srcs/libft/strdup.c\
 		srcs/libft/strjoin.c\

@@ -6,7 +6,7 @@
 /*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 10:39:07 by odessein          #+#    #+#             */
-/*   Updated: 2022/11/29 17:24:04 by caubry           ###   ########.fr       */
+/*   Updated: 2022/11/29 18:30:44 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_struct
 typedef struct s_map
 {
 	int size[2];
+	char **init_map;
 	int	color_floor[4];
 	int	color_ceiling[4];
 	char *texture[5];
@@ -62,7 +63,7 @@ void		init_map(t_map *map);
 // parsing.c
 
 bool		check_extension(char *map);
-bool		check_map(char *tmp);
+bool		check_map(char *tmp, t_map *map);
 bool		parsing_loop(char *tmp, int *i, t_map *map);
 bool		parsing(int ac, char **av, t_map *map);
 void		print_map(t_map *map);
@@ -111,6 +112,10 @@ char		*get_next_line(int fd);
 int			__is_charset(char *sep, char c);
 int			__calculate_str(char *str, char *sep);
 char		*ft_strtrim(char const *s1, char const *set);
+
+// split.c
+
+char	**ft_split(char const *s, char c);
 
 // Autres fonctions libft
 
