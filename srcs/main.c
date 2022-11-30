@@ -6,7 +6,7 @@
 /*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 16:09:33 by caubry            #+#    #+#             */
-/*   Updated: 2022/11/29 17:17:34 by caubry           ###   ########.fr       */
+/*   Updated: 2022/11/30 16:27:54 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	init_map(t_map *map)
 	}
 	map->color_floor[3] = 0;
 	map->color_ceiling[3] = 0;
+	map->player = '\0';
 }
 
 int	main(int ac, char **av)

@@ -5,12 +5,16 @@ NAME = cub3d
 SRC =	srcs/main.c\
 		srcs/parsing/parsing.c\
 		srcs/parsing/parsing_utils.c\
-		srcs/parsing/check_texture_color.c\
+		srcs/parsing/check_texture.c\
+		srcs/parsing/check_color.c\
+		srcs/parsing/check_map_valid.c\
+		srcs/parsing/check_map_closed.c\
 		srcs/libft/printf/ft_printf.c\
 		srcs/libft/printf/ft_printf_utils.c\
 		srcs/libft/get_next_line.c\
 		srcs/libft/isdigit.c\
 		srcs/libft/split.c\
+		srcs/libft/strchr.c\
 		srcs/libft/strcmp.c\
 		srcs/libft/strdup.c\
 		srcs/libft/strjoin.c\

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/24 10:39:07 by odessein          #+#    #+#             */
-/*   Updated: 2022/11/29 18:30:44 by caubry           ###   ########.fr       */
+/*   Created: 2022/11/30 15:52:41 by caubry            #+#    #+#             */
+/*   Updated: 2022/11/30 20:34:25 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_map
 	int	color_floor[4];
 	int	color_ceiling[4];
 	char *texture[5];
+	char player;
 }	t_map;
 
 //   ---     MAIN     ---
@@ -69,13 +70,33 @@ bool		parsing(int ac, char **av, t_map *map);
 void		print_map(t_map *map);
 
 
-// check_texture_color.c
+// check_texture.c
 
-bool		init_color(char *tmp, int *color);
-bool		check_colors(char *tmp, t_map *map);
 bool		init_textures(char *tmp, int i, t_map *map);
 bool		check_texture(char	*tmp, t_map *map);
 int			is_texture_or_color(char *tmp);
+
+
+// check_color.c
+
+bool		valid_color(char *tmp, int *ptr_i, int comma, int *color);
+bool		init_color(char *tmp, int *color);
+bool		check_colors(char *tmp, t_map *map);
+
+
+// check_map_valid.c
+
+void	fill_line(char *real_map, char *tab_map, int width);
+void	create_map(t_map *map, int height, char *map_in_line);
+bool	check_map(char *tmp, t_map *map);
+
+
+// check_map_closed.c
+
+bool	check_over_under(char *under_over, int y);
+bool	check_side(char *empty, int y);
+bool	inside_map(char **map, int x, t_map *config);
+bool	map_is_closed(char **map, int height, t_map *config);
 
 
 // parsing_utils.c
@@ -125,7 +146,7 @@ int			ft_strncmp(const char *s1, const char *s2, size_t n);
 char		*ft_strdup(const char *s1);
 char		*ft_strjoin(char *s1, char *s2);
 size_t		__strlen(const char *s);
-
+char		*ft_strchr(const char *s, int c);
 
 
 

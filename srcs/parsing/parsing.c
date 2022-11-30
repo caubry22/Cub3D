@@ -6,7 +6,7 @@
 /*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 16:08:11 by caubry            #+#    #+#             */
-/*   Updated: 2022/11/29 19:22:00 by caubry           ###   ########.fr       */
+/*   Updated: 2022/11/30 20:37:16 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,29 +23,6 @@ bool	check_extension(char *map)
 	tmp = map + i - 4;
 	if (ft_strcmp(tmp, ".cub"))
 		return (false);
-	return (true);
-}
-
-bool	check_map(char *tmp, t_map *map)
-{
-	int i;
-	int	width;
-
-	i = 0;
-	width = 0;
-	while (tmp[i])
-	{
-		if (tmp[i] == '	')
-			width += 4;
-		else
-			width++;
-		i++;
-	}
-	if (width > map->size[0])
-		map->size[0] = width;
-	if (width == 0)
-		return (ft_printf("Error\nErreur de configuration de la map"),
-				false);
 	return (true);
 }
 
@@ -66,7 +43,7 @@ bool	parsing_loop(char *tmp, int *i, t_map *map)
 		}
 		else
 		{
-			if (*i == 6 && tmp_length(ft_strtrim(tmp, " \n"))== 0)
+			if (*i == 6 && tmp_length(ft_strtrim(tmp, " \n")) == 0)
 				return (true);
 			check = check_map(ft_strtrim(tmp, "\n"), map);
 		}
@@ -75,64 +52,6 @@ bool	parsing_loop(char *tmp, int *i, t_map *map)
 		(*i)++;
 	}
 	return (true);
-}
-
-void	fill_line(char *real_map, char *tab_map, int width)
-{
-	int	i;
-	int	j;
-	int	tab;
-
-	i = 0;
-	j = 0;
-	while (tab_map[i])
-	{
-		tab = 0;
-		if (tab_map[i] == '	')
-		{
-			while (tab < 4)
-			{
-				real_map[i + j + tab] = '2';
-				tab++;
-			}
-			j = j + 3;
-		}
-		else if (tab_map[i] == ' ')
-			real_map[i + j] = '2';
-		else
-			real_map[i + j] = tab_map[i];
-		i++;
-	}
-	while (i + j < width)
-	{
-		real_map[i + j] = '2';
-		i++;
-	}
-	real_map[i + j] = '\0';
-}
-
-void	create_map(t_map *map, int height, char *map_in_line)
-{
-	char	**tab_map;
-	char	**real_map;
-	int		i;
-	
-	map->size[1] = height;
-	i = 0;
-	tab_map = ft_split(map_in_line, '\n');
-	real_map = malloc(sizeof(char *) * (height + 1));
-	if (!real_map)
-		return ;
-	while (i < height)
-	{
-		real_map[i] = malloc(sizeof(char) * (map->size[0] + 1));
-		if (!real_map[i])
-			return ;
-		fill_line(real_map[i], tab_map[i], map->size[0]);
-		i++;
-	}
-	tab_map[i] = NULL;
-	map->init_map = real_map;
 }
 
 bool	parsing(int ac, char **av, t_map *map)
@@ -162,13 +81,15 @@ bool	parsing(int ac, char **av, t_map *map)
 			map_in_line = ft_strjoin(map_in_line, tmp);
 	}
 	create_map(map, i - 6, map_in_line);
+	if (!map_is_closed(map->init_map, map->size[1], map))
+		return (free(tmp), ft_printf("Erreur map\n"), false);
 	print_map(map);
 	return (free(tmp), true);
 }
 
 void	print_map(t_map *map)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	ft_printf("north texture = %s\n", map->texture[0]);
