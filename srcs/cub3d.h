@@ -6,7 +6,7 @@
 /*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 15:52:41 by caubry            #+#    #+#             */
-/*   Updated: 2022/11/30 20:34:25 by caubry           ###   ########.fr       */
+/*   Updated: 2022/12/02 15:21:55 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@
 # include <fcntl.h>
 # include <stdarg.h>
 # include <errno.h>
+# include <mlx.h>
 
 typedef struct s_struct
 {
@@ -43,6 +44,14 @@ typedef struct s_struct
 	int		ret;
 
 }	t_struct;
+
+typedef struct	s_data {
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}				t_data;
 
 typedef struct s_map
 {
@@ -53,6 +62,8 @@ typedef struct s_map
 	char *texture[5];
 	char player;
 }	t_map;
+
+
 
 //   ---     MAIN     ---
 
