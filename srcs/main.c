@@ -41,7 +41,7 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-void	test_mlx(t_map *map)
+void	test_mlx(t_map *map, t_player *player)
 {
 	void	*mlx;
 	void	*mlx_win;
@@ -57,6 +57,10 @@ void	test_mlx(t_map *map)
 	img.img = mlx_new_image(mlx, map->size[0] * 32, map->size[1] * 32);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
 		&img.endian);
+	player->mlx_id = mlx;
+	player->win = mlx_win;
+	player->img = img.img;
+	player->img_addr = (int *)mlx_get_data_addr(player->img, &player->bits_per_pixel, &player->line_length, &player->endian);
 	while (x < map->size[1])
 	{
 		y = 0;
@@ -91,19 +95,23 @@ void	test_mlx(t_map *map)
 		}
 		x++;
 	}
+	draw_player(player, 10, 0xFFFFFF);
+	// mlx_hook(player->win, KeyPress, KeyPressMask, &ft_kinput, player);
 	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
 	mlx_loop(mlx);
 }
 
 int	main(int ac, char **av)
 {
-	t_map	map;
+	t_map		map;
+	t_player	player;
 
 	if (ac != 2)
 		return (ft_printf("Error\nIl faut mettre en argument le fichier de description de scene\n"), 1);
 	init_map(&map);
 	if (!parsing(ac, av, &map))
 		return (1);
-	test_mlx(&map);
+	init_player(&player, &map);
+	test_mlx(&map, &player);
 	return (1);
 }

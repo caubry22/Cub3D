@@ -37,32 +37,47 @@ bool	check_side(char *empty, int y)
 	return (true);
 }
 
-bool	inside_map(char **map, int x, t_map *config)
+void    config_player(t_map *config, char **map, int x, int y)
 {
-	int	y;
+    const float    angle[4] = {0, PI/2, PI, 3*PI/2};
+    const char    dir[4] = {'E', 'N', 'W', 'S'};
+    int            i;
 
-	y = 0;
-	while (map[x][y])
-	{
-		if (map[x][y] == '2')
-		{
-			if (!check_over_under(map[x - 1], y)
-				|| !check_over_under(map[x + 1], y)
-				|| !check_side(map[x], y))
-				return (false);
-		}
-		else if (ft_strchr("NSEW", map[x][y]))
-		{
-			if (config->player == '\0')
-				config->player = map[x][y];
-			else
-				return (false);
-		}
-		else if (!ft_strchr("01", map[x][y]))
-			return (false);
-		y++;
-	}
-	return (true);
+    i = 0;
+    config->player = map[x][y];
+    while (map[x][y] != dir[i])
+        i++;
+    config->angle = angle[i];
+    config->player_pos[0] = x;
+    config->player_pos[1] = y;
+}
+
+bool    inside_map(char **map, int x, t_map *config)
+{
+    int    y;
+
+    y = 0;
+    while (map[x][y])
+    {
+        if (map[x][y] == '2')
+        {
+            if (!check_over_under(map[x - 1], y)
+                || !check_over_under(map[x + 1], y)
+                || !check_side(map[x], y))
+                return (false);
+        }
+        else if (ft_strchr("NSEW", map[x][y]))
+        {
+            if (config->player == '\0')
+                config_player(config, map, x, y);
+            else
+                return (false);
+        }
+        else if (!ft_strchr("01", map[x][y]))
+            return (false);
+        y++;
+    }
+    return (true);
 }
 
 bool	check_first_last_line(char **map, int x)

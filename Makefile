@@ -19,7 +19,8 @@ SRC =	srcs/main.c\
 		srcs/libft/strdup.c\
 		srcs/libft/strjoin.c\
 		srcs/libft/strlen.c\
-		srcs/libft/strtrim.c
+		srcs/libft/strtrim.c\
+		srcs/player.c
 
 OBJ = ${SRC:.c=.o}
 

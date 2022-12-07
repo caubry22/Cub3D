@@ -25,6 +25,8 @@
 #  define R "0123456789ABCDEF"
 # endif
 
+# define PI 3.1415926535
+
 # include <unistd.h>
 # include <stdio.h>
 # include <math.h>
@@ -37,6 +39,8 @@
 # include <stdarg.h>
 # include <errno.h>
 # include <mlx.h>
+# include <X11/X.h>
+# include <X11/keysym.h>
 
 typedef struct s_struct
 {
@@ -61,8 +65,27 @@ typedef struct s_map
 	int	color_ceiling[4];
 	char *texture[5];
 	char player;
+	int		player_pos[2]; 	//je rajoute ca pour pouvoir calculer la position en pixel du joueur
+	float	angle;
 }	t_map;
 
+typedef struct s_player
+{
+	// a changer de place
+	void	*mlx_id;
+	void	*win;
+	void	*img;
+	int		*img_addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+	// 
+	float		px;
+	float		py;
+	float		delx;
+	float		dely;
+	float		angle;
+}	t_player;
 
 
 //   ---     MAIN     ---
@@ -115,6 +138,13 @@ bool	map_is_closed(char **map, int height, t_map *config);
 int			tmp_length(char	*tmp);
 int			line_map_length(char *tmp);
 
+//   ---     EXEC     ---
+
+// player.c
+
+int			init_player(t_player *data, t_map *map);
+int			draw_player(t_player *data, int width, int color);
+int			ft_kinput(int keysym, t_data *data);
 
 //   ---     LIBFT     ---
 
